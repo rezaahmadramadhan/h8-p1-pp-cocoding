@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Pemrograman Web Lanjut",
+        "desc": "Pelajari pemrograman website lebih dalam dengan JavaScript untuk membangun website modern.",
+        "CategoryId": 1,
+        "duration": 100,
+        "quota": 40,
+        "dateStart": "2025-02-01T00:00:00.000Z",
+        "price": 890000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DmLCy9PSJfFqO55mNTYOQLx3x8THsbokkw&s",
+        "code": "pem_web_lan"
+    },
+    {
+        "id": 2,
+        "name": "Belajar GoLang Dasar",
+        "desc": "Pelajari bahasa GoLang untuk membangun server yang baik.",
+        "CategoryId": 2,
+        "duration": 48,
+        "quota": 55,
+        "dateStart": "2024-08-30T00:00:00.000Z",
+        "price": 560000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9T7bC1a2m2yPN7Yyg3EnAZdIfp6p8_dwhlA&s",
+        "code": "bel_gol_das"
+    }
+]

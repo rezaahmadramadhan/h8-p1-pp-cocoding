@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Web Development",
+        "progLang": "Javascript"
+    },
+    {
+        "id": 2,
+        "name": "Server",
+        "progLang": "Go"
+    },
+    {
+        "id": 3,
+        "name": "Mobile Developer",
+        "progLang": "Kotlin"
+    },
+    {
+        "id": 4,
+        "name": "AI Prompting",
+        "progLang": "Python"
+    },
+    {
+        "id": 5,
+        "name": "Debugging",
+        "progLang": "C++"
+    },
+    {
+        "id": 6,
+        "name": "DevOps",
+        "progLang": "Ruby"
+    }
+]

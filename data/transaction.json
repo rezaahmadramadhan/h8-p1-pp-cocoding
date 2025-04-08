@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "dateTrans": "2024-08-20T00:00:00.000Z",
+        "course": "Belajar GoLang Dasar",
+        "totalPrice": 560000,
+        "CourseId": 2,
+        "ProfileId": 3
+    },
+    {
+        "id": 2,
+        "dateTrans": "2024-08-10T00:00:00.000Z",
+        "course": "Belajar GoLang Dasar",
+        "totalPrice": 560000,
+        "CourseId": 2,
+        "ProfileId": 2
+    },
+    {
+        "id": 3,
+        "dateTrans": "2025-01-18T00:00:00.000Z",
+        "course": "Pemrograman Web Lanjut",
+        "totalPrice": 890000,
+        "CourseId": 1,
+        "ProfileId": 1
+    }
+]

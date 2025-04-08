@@ -1,0 +1,25 @@
+[
+    {
+        "id": 1,
+        "name": "Budi",
+        "age": 30,
+        "address": "Jaksel",
+        "phone": "081236783456",
+        "UserId": 1
+    },
+    {
+        "id": 2,
+        "name": "Reza",
+        "age": 25,
+        "address": "Bogor",
+        "phone": "086789543678",
+        "UserId": 2
+    },{
+        "id": 3,
+        "name": "Agus",
+        "age": 45,
+        "address": "New York",
+        "phone": "085823236767",
+        "UserId": 3
+    }
+]

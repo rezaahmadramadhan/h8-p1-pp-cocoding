@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup</title>
+    <style>
+        .auth-container {
+            margin-top: 100px;
+            max-width: 400px;
+        }
+        .auth-tabs .nav-link {
+            border: none;
+            color: #666;
+            font-weight: 500;
+        }
+        .auth-tabs .nav-link.active {
+            color: #0d6efd;
+            border-bottom: 2px solid #0d6efd;
+        }
+        .auth-form {
+            padding: 30px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-icon {
+            position: absolute;
+            margin-top: 12px;
+            margin-left: 15px;
+            color: #666;
+            z-index: 2;
+        }
+        .form-control {
+            padding-left: 40px !important; /* Pastikan padding cukup untuk ikon */
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="auth-container">
+                <ul class="nav nav-tabs auth-tabs mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="" onclick="switchForm('login')">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#signUp" onclick="switchForm('signup')">Sign Up</a>
+                    </li>
+                </ul>
+
+                <% if (error) { %>
+                    <p style="color: red;"><%= error %></p>
+                <% } %>
+
+                <form method="post" action="/login" id="loginForm" class="auth-form bg-white">
+                    <div class="mb-3 input-group">
+                        <i class="fas fa-envelope form-icon"></i>
+                        <input name="username" type="text" class="form-control" placeholder="username" required>
+                    </div>
+                    <div class="mb-3 input-group">
+                        <i class="fas fa-lock form-icon"></i>
+                        <input name="password" type="password" class="form-control" placeholder="password" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input">
+                        <label class="form-check-label">Remember me</label>
+                        <a href="#" class="float-end">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+
+                <form method="post" action="/signUp" id="signupForm" class="auth-form bg-white" style="display: none;">
+                    <div class="mb-3 input-group">
+                        <i class="fas fa-user form-icon"></i>
+                        <input name="username" type="text" class="form-control" placeholder="username" required>
+                    </div>
+                    <div class="mb-3 input-group">
+                        <i class="fas fa-envelope form-icon"></i>
+                        <input name="email" type="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="mb-3 input-group">
+                        <i class="fas fa-lock form-icon"></i>
+                        <input name="password" type="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="mb-3 input-group">
+                        <i class="fas fa-lock form-icon"></i>
+                        <input type="password" class="form-control" placeholder="Confirm Password" required>
+                    </div>
+                    <div class="mb-3 input-group">
+                        <select name="role" class="form-select" aria-label="Default select example">
+                            <option selected>Select Role</option>
+                            <% const roles = ["admin", "buyer"] %>
+                            <% roles.forEach(el => { %>
+                                <option value="<%= el %>"><%= el %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchForm(formType) {
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const tabs = document.querySelectorAll('.nav-link');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            document.querySelector(`[onclick="switchForm('${formType}')"]`).classList.add('active');
+
+            if(formType === 'login') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+            }
+        }
+    </script>
+
+    <%- include('_styling') %>
+</body>
+</html>
