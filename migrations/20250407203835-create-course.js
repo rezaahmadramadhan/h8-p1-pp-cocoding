@@ -10,27 +10,35 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       price: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       quota: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       duration: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       dateStart: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       desc: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       img: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       CategoryId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "Categories",

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profil</title>
+    <%- include('_styling') %>
+    <style>
+        .profile-container {
+            margin-top: 100px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-picture:hover {
+            transform: scale(1.05);
+        }
+        
+        .password-fields {
+            display: none;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <%- include('_navbar') %>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 profile-container">
+                <h2 class="mb-4 text-center">Profile</h2>
+                
+                <% if (error) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <% } %>
+
+                <form action="/profile/<%= data.id %>/edit" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Nama Lengkap</label>
+                        <input name="name" type="text" class="form-control" value="<%= data.name %>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input name="email" type="text" class="form-control" value="<%= data.User.email %>">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Age</label>
+                        <input name="age" type="number" class="form-control" value="<%= data.age %>">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" 
+                                  name="address" 
+                                  rows="3"
+                                  value="<%= data.address %>"
+                                  placeholder="Input your address"><%= user.bio %></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Phone Number</label>
+                        <input name="phone" type="text" class="form-control" value="<%= data.phone %>">
+                    </div>
+
+                    <!-- Ubah Password -->
+                    <!-- <div class="mb-4">
+                        <button type="button" 
+                                class="btn btn-outline-secondary w-100" 
+                                id="togglePassword">
+                            Ubah Password
+                        </button>
+                        
+                        <div class="password-fields mt-3">
+                            <div class="mb-3">
+                                <label class="form-label">Password Saat Ini</label>
+                                <input type="password" class="form-control">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Password Baru</label>
+                                <input type="password" class="form-control" name="newPassword">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Konfirmasi Password Baru</label>
+                                <input type="password" class="form-control" name="confirmPassword">
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Tombol Aksi -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary py-2">
+                            <i class="fas fa-save me-2"></i>Save Changes
+                        </button>
+                        <a href="/" class="btn btn-outline-secondary">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Preview foto profil
+        document.getElementById('avatarUpload').addEventListener('change', function(e) {
+            const reader = new FileReader()
+            reader.onload = function() {
+                document.getElementById('avatarPreview').src = reader.result
+            }
+            reader.readAsDataURL(e.target.files[0])
+        })
+
+        // Toggle password fields
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordFields = document.querySelector('.password-fields')
+            passwordFields.style.display = passwordFields.style.display === 'none' ? 'block' : 'none'
+            this.textContent = passwordFields.style.display === 'none' ? 
+                'Ubah Password' : 
+                'Sembunyikan'
+        })
+    </script>
+</body>
+</html>

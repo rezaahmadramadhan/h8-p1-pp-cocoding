@@ -28,5 +28,10 @@
         "id": 6,
         "name": "DevOps",
         "progLang": "Ruby"
+    },
+    {
+        "id": 7,
+        "name": "Cybersecurity",
+        "progLang": "Rust"
     }
 ]

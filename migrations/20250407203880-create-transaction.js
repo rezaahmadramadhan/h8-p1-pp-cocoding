@@ -10,15 +10,19 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       dateTrans: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       course: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       totalPrice: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       CourseId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "Courses",
@@ -28,6 +32,7 @@ module.exports = {
         onUpdate: 'CASCADE'
       },
       ProfileId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "Profiles",

@@ -53,7 +53,17 @@ class Controller {
 
     static async buyCourse(req, res) {
         try {
-            res.render('buyCourse')
+            const {id} = req.params
+            const {error} = req.query
+            const {user} = req.session 
+            let data = (await Course.findAll({
+                where: {id},
+                include: {
+                    model: Category
+                }
+            }))[0]
+
+            res.render('buyCourse', {data, error, user})
         } catch (error) {
             res.send(error)
         }
@@ -61,7 +71,9 @@ class Controller {
 
     static async signUp(req, res) {
         try {
-            await User.create(req.body)
+            let data = await User.create(req.body)
+            await Profile.create({UserId: data.id})
+            
 
             res.redirect("/login")
         } catch (error) {
@@ -150,7 +162,6 @@ class Controller {
                     model: Category
                 }
             }))[0]
-
             let cat = await Category.findAll()
 
             res.render('editCourse', {data, cat})
@@ -172,11 +183,44 @@ class Controller {
         }
     }
 
+    static async editProfile(req, res) {
+        try {
+            const {id} = req.params
+            const {error} = req.query
+            const {user} = req.session
+            const data = (await Profile.findAll({
+                where: {UserId: +id},
+                include: {
+                    model: User
+                }
+            }))[0]
+            
+            res.render('editProfile', {data, error, user})
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async postEditProfile(req, res) {
+        try {
+            const {id} = req.params
+            await Profile.update(req.body, {
+                where: {id}
+            })
+
+            res.redirect("/")
+        } catch (error) {
+            console.log(error);
+            
+            res.send(error)
+        }
+    }
+
     static async deleteCourse(req, res) {
         try {
             const {id} = req.params
-            await Course.destroy({where: {id}})
-
+            Course.deleteCourse(id)
+            
             res.redirect("/courses")
         } catch (error) {
             res.send(error)

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Course</title>
+    <%- include('_styling') %>
+    
+    <style>
+        .checkout-container {
+            margin-top: 100px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .course-preview {
+            border-right: 2px solid #dee2e6;
+            padding-right: 30px;
+        }
+        
+        .payment-methods img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .price-breakdown {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('_navbar') %>
+
+    <div class="container">
+        <div class="row checkout-container">
+            <!-- Bagian Kiri - Detail Course -->
+            <div class="col-md-7 course-preview">
+                <h2 class="mb-4"><%= data.name %></h2>
+                
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <p><i class="fas fa-clock me-2"></i>Durasi:<br>
+                        <strong><%= data.duration %> Jam</strong></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p><i class="fas fa-layer-group me-2"></i>Kategori:<br>
+                        <strong><%= data.Category.name %></strong></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p><i class="fas fa-certificate me-2"></i>Sertifikat:<br>
+                        <strong>Ya</strong></p>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Deskripsi Course</h5>
+                    <p class="text-muted"><%= data.desc %></p>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Yang akan Anda pelajari</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success me-2"></i>Bahasa pemrograman: <%= data.Category.progLang %>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success me-2"></i>Materi yang ada di Hacktiv8
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success me-2"></i>Handling error
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success me-2"></i>Test dari banyak kasus pemrograman
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bagian Kanan - Checkout -->
+            <div class="col-md-5">
+                <div class="price-breakdown">
+                    <h4 class="mb-4">Ringkasan Pembelian</h4>
+                    
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Harga Course:</span>
+                        <span class="fw-bold">Rupiah</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Diskon:</span>
+                        <span class="text-success">-</span>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between mb-4">
+                        <span class="fw-bold">Total Pembayaran:</span>
+                        <span class="fw-bold text-primary"></span>
+                    </div>
+
+                    <form action="/courses/<%= data.id %>/purchase" method="POST">
+                        <div class="mb-4">
+                            <h5>Metode Pembayaran</h5>
+                            <div class="payment-methods">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" required>
+                                    <label class="form-check-label" for="creditCard">
+                                        <i class="fa-solid fa-credit-card"></i>
+                                        Kartu Kredit
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="bankTransfer">
+                                    <label class="form-check-label" for="bankTransfer">
+                                        <img src="bank-transfer-icon.png" alt="Bank Transfer">
+                                        Transfer Bank
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="ewallet">
+                                    <label class="form-check-label" for="ewallet">
+                                        <img src="ewallet-icon.png" alt="E-Wallet">
+                                        Dompet Digital
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="email" class="form-label">Email untuk Notifikasi</label>
+                            <input type="email" class="form-control" id="email" name="email" 
+                                   value="" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-3">
+                            <i class="fas fa-lock me-2"></i>Bayar Sekarang
+                        </button>
+                    </form>
+
+                    <div class="mt-3 text-center">
+                        <small class="text-muted">Dengan mengklik 'Bayar Sekarang', Anda menyetujui 
+                        <a href="#">Syarat dan Ketentuan</a> kami</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pembayaran Berhasil!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Terima kasih telah membeli course <strong><%= data.name %></strong>. 
+                    Materi course sekarang dapat diakses di dashboard Anda.</p>
+                    <p>Invoice telah dikirim ke <strong>Email@gmail.com</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="/dashboard" class="btn btn-primary">Ke Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle payment method selection
+        document.querySelectorAll('.form-check-input').forEach(input => {
+            input.addEventListener('change', function() {
+                // Tambahkan logika untuk metode pembayaran berbeda
+                console.log('Payment method selected:', this.id);
+            });
+        });
+
+        // Tampilkan modal jika ada parameter success
+
+    </script>
+</body>
+</html>

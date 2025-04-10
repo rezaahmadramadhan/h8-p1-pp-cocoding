@@ -22,5 +22,101 @@
         "price": 560000,
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9T7bC1a2m2yPN7Yyg3EnAZdIfp6p8_dwhlA&s",
         "code": "bel_gol_das"
+    },
+    {
+        "id": 3,
+        "name": "Python Programming Expert",
+        "desc": "Kuasai Python dari dasar hingga implementasi dalam machine learning dan automation.",
+        "CategoryId": 3,
+        "duration": 80,
+        "quota": 60,
+        "dateStart": "2024-05-15T00:00:00.000Z",
+        "price": 750000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5X5ZJ7QY7jDk6m7v6a0JkZ8Qwq9XQjKjH7g&s",
+        "code": "pyt_pro_exp"
+    },
+    {
+        "id": 4,
+        "name": "React Native untuk Aplikasi Mobile",
+        "desc": "Buat aplikasi mobile cross-platform dengan React Native dan integrasi API.",
+        "CategoryId": 1,
+        "duration": 60,
+        "quota": 35,
+        "dateStart": "2025-03-10T00:00:00.000Z",
+        "price": 950000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6JXv6Z4V7q9w8Y0Ld7jv7Qk3mZ6XsH7jH4g&s",
+        "code": "rea_nat_mob"
+    },
+    {
+        "id": 5,
+        "name": "Data Science dengan Python",
+        "desc": "Analisis data, visualisasi, dan machine learning menggunakan Python dan library populer.",
+        "CategoryId": 4,
+        "duration": 120,
+        "quota": 25,
+        "dateStart": "2024-07-01T00:00:00.000Z",
+        "price": 1200000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1Yv7Y9X7Jv8Qk8Qk8XqZvW9jQk8XsH7jH4g&s",
+        "code": "dat_sci_pyt"
+    },
+    {
+        "id": 6,
+        "name": "UI/UX Design Modern",
+        "desc": "Pelajari prinsip desain antarmuka pengguna dan prototyping dengan Figma.",
+        "CategoryId": 5,
+        "duration": 50,
+        "quota": 45,
+        "dateStart": "2025-01-20T00:00:00.000Z",
+        "price": 650000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5X5ZJ7QY7jDk6m7v6a0JkZ8Qwq9XQjKjH7g&s",
+        "code": "ui_ux_des"
+    },
+    {
+        "id": 7,
+        "name": "Keamanan Siber untuk Pemula",
+        "desc": "Pahami dasar-dasar keamanan jaringan dan teknik penetration testing.",
+        "CategoryId": 6,
+        "duration": 90,
+        "quota": 30,
+        "dateStart": "2024-09-15T00:00:00.000Z",
+        "price": 980000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6JXv6Z4V7q9w8Y0Ld7jv7Qk3mZ6XsH7jH4g&s",
+        "code": "cyb_sec_bas"
+    },
+    {
+        "id": 8,
+        "name": "Cloud Computing dengan AWS",
+        "desc": "Pelajari layanan AWS untuk deployment aplikasi skalabel di cloud.",
+        "CategoryId": 7,
+        "duration": 70,
+        "quota": 40,
+        "dateStart": "2025-06-01T00:00:00.000Z",
+        "price": 850000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1Yv7Y9X7Jv8Qk8Qk8XqZvW9jQk8XsH7jH4g&s",
+        "code": "clo_com_aws"
+    },
+    {
+        "id": 9,
+        "name": "DevOps dengan Docker & Kubernetes",
+        "desc": "Implementasi CI/CD dan manajemen container menggunakan Docker & Kubernetes.",
+        "CategoryId": 7,
+        "duration": 55,
+        "quota": 50,
+        "dateStart": "2024-11-10T00:00:00.000Z",
+        "price": 720000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5X5ZJ7QY7jDk6m7v6a0JkZ8Qwq9XQjKjH7g&s",
+        "code": "dev_doc_kub"
+    },
+    {
+        "id": 10,
+        "name": "Machine Learning Dasar",
+        "desc": "Pengenalan algoritma machine learning dan implementasi dengan Python.",
+        "CategoryId": 4,
+        "duration": 100,
+        "quota": 30,
+        "dateStart": "2024-04-05T00:00:00.000Z",
+        "price": 1100000,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6JXv6Z4V7q9w8Y0Ld7jv7Qk3mZ6XsH7jH4g&s",
+        "code": "mac_lea_bas"
     }
 ]
