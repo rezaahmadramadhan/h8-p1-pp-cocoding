@@ -9,25 +9,25 @@
 <body class="bg-gray-50">
     <div class="container mx-auto p-6 max-w-4xl">
         
-        <h1 class="text-3xl font-bold text-gray-800 mb-8">Create New Course</h1>
-        
-        <form method="post" action="/courses/add" id="courseForm" class="space-y-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">Edit Course</h1>
+
+        <form method="post" action="/courses/<%= data.id %>/edit" id="courseForm" class="space-y-8">
             <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h2 class="text-xl font-semibold mb-4">Course Information</h2>
                 
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Course Name</label>
-                        <input name="name" type="text" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Name of course">
+                        <input name="name" value="<%= data.name %>" type="text" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Name of course">
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                         <textarea
-                            name="desc" 
+                            name="desc"
                             rows="3"
                             class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Description of course detail"></textarea>
+                            placeholder="Description of course detail"><%= data.desc %></textarea>
                     </div>
                 </div>
             </div>
@@ -38,16 +38,17 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
-                        <select name="CategoryId" class="w-full px-4 py-2 border rounded-md">
-                            <% data.forEach(cat => { %>
-                                <option value="<%= cat.id %>"><%= cat.name %></option>
+                        <select name="CategoryId" value="" class="w-full px-4 py-2 border rounded-md">
+                            <option value="<%= data.Category.id %>"><%= data.Category.name %></option>
+                            <% cat.forEach(el => { %>
+                                <option value="<%= el.id %>"><%= el.name %></option>
                             <% }) %>
                         </select>
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Duration</label>
-                        <input name="duration" type="number" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Duration of course">
+                        <input name="duration" value="<%= data.duration %>" type="number" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Duration of course">
                     </div>
                 </div>
             </div>
@@ -58,12 +59,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Quota</label>
-                        <input name="quota" type="number" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Quota of course">
+                        <input name="quota" value="<%= data.quota %>" type="number" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Quota of course">
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Date Start</label>
-                        <input name="dateStart" type="date" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <input name="dateStart" value="<%= data.dateStart %>" type="date" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 </div>
             </div>
@@ -74,12 +75,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Price (Rp)</label>
-                        <input name="price" type="number" min="0" class="w-full px-4 py-2 border rounded-md" placeholder="Ex: 150000">
+                        <input name="price" type="number" value="<%= data.price %>" min="0" class="w-full px-4 py-2 border rounded-md" placeholder="Ex: 150000">
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Upload Thumbnail Link</label>
-                        <input name="img" type="text" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Input link of thumbnail photo">
+                        <input name="img" type="text" value="<%= data.img %>" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Input link of thumbnail photo">
                         </div>
                     </div>
                 </div>
@@ -87,7 +88,7 @@
 
             <div class="flex justify-center">
                 <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    Create Course
+                    Update Course
                 </button>
             </div>
         </form>

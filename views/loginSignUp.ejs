@@ -3,40 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Signup</title>
+    <title>Login & Signup - Modern Design</title>
     <style>
-        .auth-container {
-            margin-top: 100px;
-            max-width: 400px;
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #4f46e5;
+            --accent-color: #818cf8;
+            --background-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
         }
+
+        body {
+            background: var(--background-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        .auth-container {
+            margin-top: 80px;
+            max-width: 440px;
+            animation: slideUp 0.8s ease;
+        }
+
         .auth-tabs .nav-link {
             border: none;
-            color: #666;
+            color: #fff;
             font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 1rem 2rem;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            position: relative;
+            background: transparent;
         }
+
         .auth-tabs .nav-link.active {
-            color: #0d6efd;
-            border-bottom: 2px solid #0d6efd;
+            opacity: 1;
+            color: #fff;
         }
+
+        .auth-tabs .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
         .auth-form {
-            padding: 30px;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         .form-icon {
             position: absolute;
-            margin-top: 12px;
+            margin-top: 16px;
             margin-left: 15px;
-            color: #666;
-            z-index: 2;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
         }
+
         .form-control {
-            padding-left: 40px !important; /* Pastikan padding cukup untuk ikon */
+            padding-left: 45px !important;
+            height: 50px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
-        .input-group {
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .form-control:focus + .form-icon {
+            color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .btn-primary {
+            background: var(--background-gradient);
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .social-login {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            background: #f8f9fa;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .divider {
+            text-align: center;
             position: relative;
-            margin-bottom: 1rem;
+            margin: 2rem 0;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
+            color: #666;
         }
     </style>
 </head>
@@ -44,7 +166,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="auth-container">
-                <ul class="nav nav-tabs auth-tabs mb-4">
+                <ul class="nav nav-tabs auth-tabs mb-4 justify-content-center">
                     <li class="nav-item">
                         <a class="nav-link active" href="" onclick="switchForm('login')">Login</a>
                     </li>
@@ -54,60 +176,169 @@
                 </ul>
 
                 <% if (error) { %>
-                    <p style="color: red;"><%= error %></p>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
                 <% } %>
 
                 <form method="post" action="/login" id="loginForm" class="auth-form bg-white">
-                    <div class="mb-3 input-group">
-                        <i class="fas fa-envelope form-icon"></i>
-                        <input name="username" type="text" class="form-control" placeholder="username" required>
+                    <div class="mb-4 input-group">
+                        <input name="username" type="text" class="form-control" placeholder="Username" required>
+                        <i class="fas fa-user form-icon mx-3"></i>
                     </div>
-                    <div class="mb-3 input-group">
-                        <i class="fas fa-lock form-icon"></i>
-                        <input name="password" type="password" class="form-control" placeholder="password" required>
+                    <div class="mb-4 input-group">
+                        <input name="password" type="password" class="form-control" placeholder="Password" required>
+                        <i class="fas fa-lock form-icon mx-3"></i>
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input">
                         <label class="form-check-label">Remember me</label>
-                        <a href="#" class="float-end">Forgot password?</a>
+                        <a href="#" class="float-end text-decoration-none">Forgot password?</a>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                    <button type="submit" class="btn btn-primary w-100 mb-3">Sign In</button>
+                    
+                    <div class="divider">
+                        <span>Or continue with</span>
+                    </div>
+                    
+                    <div class="social-login">
+                        <button type="button" class="social-btn">
+                            <i class="fab fa-google text-danger"></i>
+                        </button>
+                        <button type="button" class="social-btn">
+                            <i class="fab fa-facebook text-primary"></i>
+                        </button>
+                        <button type="button" class="social-btn">
+                            <i class="fab fa-apple"></i>
+                        </button>
+                    </div>
                 </form>
 
                 <form method="post" action="/signUp" id="signupForm" class="auth-form bg-white" style="display: none;">
-                    <div class="mb-3 input-group">
-                        <i class="fas fa-user form-icon"></i>
-                        <input name="username" type="text" class="form-control" placeholder="username" required>
+                    <div class="mb-4 input-group">
+                        <input name="username" type="text" class="form-control" placeholder="Username" required>
+                        <i class="fas fa-user form-icon mx-3"></i>
                     </div>
-                    <div class="mb-3 input-group">
-                        <i class="fas fa-envelope form-icon"></i>
+                    
+                    <div class="mb-4 input-group">
                         <input name="email" type="email" class="form-control" placeholder="Email" required>
+                        <i class="fas fa-envelope form-icon mx-3"></i>
                     </div>
-                    <div class="mb-3 input-group">
-                        <i class="fas fa-lock form-icon"></i>
-                        <input name="password" type="password" class="form-control" placeholder="Password" required>
-                    </div>
-                    <div class="mb-3 input-group">
-                        <i class="fas fa-lock form-icon"></i>
-                        <input type="password" class="form-control" placeholder="Confirm Password" required>
-                    </div>
-                    <div class="mb-3 input-group">
-                        <select name="role" class="form-select" aria-label="Default select example">
+
+                    <div class="mb-4 input-group">
+                        <select name="role" class="form-select" aria-label="Role selection" style="padding-left: 40px; height: 50px;">
                             <option selected>Select Role</option>
                             <% const roles = ["admin", "buyer"] %>
                             <% roles.forEach(el => { %>
                                 <option value="<%= el %>"><%= el %></option>
                             <% }) %>
                         </select>
+                        <i class="fas fa-font-awesome form-icon mx-3"></i>
                     </div>
-                    <button type="submit" class="btn btn-success w-100">Create Account</button>
+
+                    <div class="mb-4 input-group">
+                        <input name="password" type="password" class="form-control" placeholder="Password" required>
+                        <i class="fas fa-lock form-icon mx-3"></i>
+                    </div>
+                    
+                    <div class="mb-4 input-group">
+                        <input type="password" class="form-control" placeholder="Confirm Password" required>
+                        <i class="fas fa-lock form-icon mx-3"></i>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100 mb-3">Create Account</button>
+                    
+                    <div class="divider">
+                        <span>Already have an account?</span>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="button" onclick="switchForm('login')" class="btn btn-outline-primary">
+                            Login instead
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 
+    <div class="container text-center my-4">
+        <form action="/" method="get">
+            <button class="brand-btn">
+                <span class="btn-content">
+                    <i class="fab fa-cuttlefish"></i>
+                    <span>O C O D I N G</span>
+                </span>
+            </button>
+        </form>
+    </div>
+    
+    <style>
+        .brand-btn {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 35px;
+            color: white;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            cursor: pointer;
+        }
+    
+        .brand-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+    
+        .brand-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+    
+        .brand-btn:hover::before {
+            left: 100%;
+        }
+    
+        .brand-btn:active {
+            transform: scale(0.98);
+        }
+    
+        .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+    
+        .brand-btn i {
+            font-size: 1.4em;
+            transition: transform 0.3s ease;
+        }
+    
+        .brand-btn:hover i {
+            transform: rotate(360deg);
+        }
+    </style>
+
     <script>
-        function switchForm(formType) {
+         function switchForm(formType) {
             const loginForm = document.getElementById('loginForm');
             const signupForm = document.getElementById('signupForm');
             const tabs = document.querySelectorAll('.nav-link');

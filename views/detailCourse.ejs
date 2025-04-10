@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Detail - Coding Academy</title>
+    
+    <style>
+        .course-hero {
+            background-color: #f8f9fa;
+            padding: 4rem 0;
+        }
+        
+        .course-syllabus-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+        
+        .course-syllabus-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .course-sidebar {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .enroll-button {
+            background-color: #00cc88;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            width: 100%;
+        }
+        
+        .rating-star {
+            color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+<%- include('_navbar') %>
+
+<header class="course-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <span class="badge bg-primary mb-3"><%= data.Category.name %></span>
+                <h1 class="display-4 fw-bold mb-3"><%= data.name %></h1>
+                <p class="lead mb-4"><%= data.desc %></p>
+                
+                <div class="d-flex gap-4 text-muted">
+                    <div>
+                        <i class="fas fa-clock me-2"></i>
+                        <span><%= data.duration %> Jam</span>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-file-code"></i>
+                        <span><%= data.code %> Jam</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-star rating-star"></i>
+                        <span>4.9/5 (1.2k reviews)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container my-5">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <nav class="mb-5">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#overview">Overview</button>
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#syllabus">Syllabus</button>
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reviews">Reviews</button>
+                </div>
+            </nav>
+
+            <div class="tab-content">
+                <!-- Overview Tab -->
+                <div class="tab-pane fade show active" id="overview">
+                    <h3 class="mb-4">Apa yang akan Anda pelajari?</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Membangun website modern</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Backend dengan Node.js</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Frontend dengan React</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Bahasa pemrograman <%= data.Category.progLang %></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h3 class="mt-5 mb-4">Persyaratan</h3>
+                    <ul>
+                        <li>Pemahaman dasar HTML/CSS</li>
+                        <li>Pengalaman dasar pemrograman</li>
+                    </ul>
+                </div>
+
+                <!-- Syllabus Tab -->
+                <div class="tab-pane fade" id="syllabus">
+                    <div class="course-syllabus-item">
+                        <div class="d-flex justify-content-between">
+                            <h5>Pengenalan Full-Stack Development</h5>
+                            <span>2 Jam</span>
+                        </div>
+                        <p class="text-muted mt-2">Konsep dasar full-stack development dan tools yang akan digunakan</p>
+                    </div>
+                    <!-- Add more syllabus items -->
+                </div>
+
+                <!-- Reviews Tab -->
+                <div class="tab-pane fade" id="reviews">
+                    <div class="d-flex align-items-center mb-4">
+                        <h3 class="me-3">4.9</h3>
+                        <div>
+                            <div class="rating-star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="text-muted mb-0">1,234 Reviews</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Review Items -->
+                    <div class="review-item mb-4">
+                        <div class="d-flex justify-content-between">
+                            <h5>John Doe</h5>
+                            <div class="rating-star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-muted">Kursus yang sangat komprehensif dan mudah diikuti</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="course-sidebar">
+                <div class="col-lg-12 mt-4 mt-lg-0">
+                    <div class="course-thumbnail">
+                        <img src="<%= data.img %>" class="img-fluid" loading="lazy">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-muted mb-2"><i class="fas fa-users me-2"></i>Quota: <%= data.quota %></p>
+                    <h2 class="text-primary"><%= formatRp(data.price) %></h2>
+                </div>
+                
+                <form method="get" action="/courses/<%= data.id %>/buy">
+                    <button class="enroll-button mb-4">Daftar Sekarang</button>
+                </form>
+
+                <a href="/courses/<%= data.id %>/edit" class="btn btn-warning mb-3 w-100">
+                    <i class="fas fa-edit me-2"></i>Edit Course
+                </a>
+
+                <a href="/courses/<%= data.id %>/delete" class="btn btn-danger mb-3 w-100">
+                    <i class="fas fa-trash me-2"></i>Delete Course
+                </a>
+                
+                <div class="border-top pt-4">
+                    <h5 class="mb-3">Kursus Ini Termasuk:</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-video me-2"></i>50 jam video</li>
+                        <li class="mb-2"><i class="fas fa-file-code me-2"></i>25 sumber kode</li>
+                        <li class="mb-2"><i class="fas fa-certificate me-2"></i>Sertifikat</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('_styling') %>
+</body>
+</html>

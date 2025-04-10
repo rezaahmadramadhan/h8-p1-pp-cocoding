@@ -6,7 +6,10 @@ const {Category, Course, Profile, Transaction, User} = require('../models')
 class Controller {
     static async homePage(req, res) {
         try {
-            res.render('homePage')
+            const {error} = req.query
+            const {user} = req.session
+                
+            res.render('homePage', {error, user})
         } catch (error) {
             res.send(error)
         }
@@ -14,7 +17,9 @@ class Controller {
 
     static async showCourse(req, res) {
         try {
-            const {search, cat} = req.query   
+            const {search, cat} = req.query 
+            const {error} = req.query
+            const {user} = req.session  
 
             let data = await Course.findAll({
                 include: {
@@ -39,8 +44,16 @@ class Controller {
                     }
                 })
             }
+                
+            res.render('showCourse', {data, error, user, formatRp})  
+        } catch (error) {
+            res.send(error)
+        }
+    }
 
-            res.render('showCourse', {data, formatRp, formatLevel})  
+    static async buyCourse(req, res) {
+        try {
+            res.render('buyCourse')
         } catch (error) {
             res.send(error)
         }
@@ -75,14 +88,14 @@ class Controller {
                 const isValidPass = bcryptjs.compareSync(password, data.password)
                 
                 if (isValidPass) {
-                    req.session.user = {userId: data.id, role: data.role}
+                    req.session.user = {userId: data.id, name: data.username, role: data.role}
 
-                    return res.redirect('/')
+                    res.redirect('/')
                 } else {
-                    return res.redirect(`/login?error=Invalid Password, Please Try Again!`)
+                    res.redirect(`/login?error=Invalid Password, Please Try Again!`)
                 }
             } else {
-                return res.redirect(`/login?error=Username not Found, Please Sign Up First!`)
+                res.redirect(`/login?error=Username not Found, Please Sign Up First!`)
             }
         } catch (error) {
             res.send(error)
@@ -105,8 +118,78 @@ class Controller {
             
             res.redirect("/courses")
         } catch (error) {
-            console.log(error);
+            res.send(error)
+        }
+    }
+
+    static async detailCourse(req, res) {
+        try {
+            const {id} = req.params
+            const {error} = req.query
+            const {user} = req.session
+
+            let data = (await Course.findAll({
+                where: {id},
+                include: {
+                    model: Category
+                }
+            }))[0]
+
+            res.render('detailCourse', {data, user, error, formatRp})
+        } catch (error) {
+            res.send(error)
+        }
+    }    
+
+    static async editCourse(req,res) {
+        try {
+            const {id} = req.params
+            let data = (await Course.findAll({
+                where: {id},
+                include: {
+                    model: Category
+                }
+            }))[0]
+
+            let cat = await Category.findAll()
+
+            res.render('editCourse', {data, cat})
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async postEditCourse(req, res) {
+        try {
+            const {id} = req.params
+            await Course.update(req.body, {
+                where: {id}
+            })
             
+            res.redirect("/courses")
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async deleteCourse(req, res) {
+        try {
+            const {id} = req.params
+            await Course.destroy({where: {id}})
+
+            res.redirect("/courses")
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async logout(req, res) {
+        try {
+            req.session.destroy(err => {
+                if (err) res.send(err)
+                else res.redirect('/')
+            })
+        } catch (error) {
             res.send(error)
         }
     }

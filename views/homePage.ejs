@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Learning Platform</title>
+    <title>COCODING</title>
     
     <style>
         .hero-section {
@@ -30,42 +30,16 @@
     </style>
 </head>
 <body>
+<%- include('_navbar') %>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/courses">Courses</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/courses/add">Add Courses</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-primary ms-2" href="/login">Login/SignUp</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- Hero Section -->
 <section class="hero-section">
     <div class="container text-center">
         <h1 class="display-4 mb-4">Mulai Karirmu sebagai Developer Profesional</h1>
         <p class="lead mb-4">Belajar coding online dengan kurikulum industri dan dapatkan sertifikasi resmi</p>
-        <button class="btn btn-warning btn-lg">Mulai Belajar Sekarang</button>
+        <a href="/courses" class="btn btn-warning btn-lg">Mulai Belajar Sekarang</a>
     </div>
 </section>
 
-<!-- Categories Section -->
 <section class="py-5">
     <div class="container">
         <h2 class="text-center mb-5">Kategori Kelas Populer</h2>
@@ -91,9 +65,9 @@
             <div class="col-md-4">
                 <div class="card category-card h-100 shadow">
                     <div class="card-body">
-                        <i class="fas fa-cloud fa-3x text-info mb-3"></i>
-                        <h5>Cloud Computing</h5>
-                        <p>Pelajari teknologi cloud terbaru</p>
+                        <i class="fa-brands fa-connectdevelop fa-3x text-info mb-3"></i>
+                        <h5>DevOps</h5>
+                        <p>Pelajari DevOps untuk software development</p>
                     </div>
                 </div>
             </div>
