@@ -184,11 +184,11 @@
 
                 <form method="post" action="/login" id="loginForm" class="auth-form bg-white">
                     <div class="mb-4 input-group">
-                        <input name="username" type="text" class="form-control" placeholder="Username" required>
+                        <input name="username" type="text" class="form-control" placeholder="Username">
                         <i class="fas fa-user form-icon mx-3"></i>
                     </div>
                     <div class="mb-4 input-group">
-                        <input name="password" type="password" class="form-control" placeholder="Password" required>
+                        <input name="password" type="password" class="form-control" placeholder="Password">
                         <i class="fas fa-lock form-icon mx-3"></i>
                     </div>
                     <div class="mb-3 form-check">
@@ -217,33 +217,27 @@
 
                 <form method="post" action="/signUp" id="signupForm" class="auth-form bg-white" style="display: none;">
                     <div class="mb-4 input-group">
-                        <input name="username" type="text" class="form-control" placeholder="Username" required>
+                        <input name="username" type="text" class="form-control" placeholder="Username">
                         <i class="fas fa-user form-icon mx-3"></i>
                     </div>
                     
                     <div class="mb-4 input-group">
-                        <input name="email" type="email" class="form-control" placeholder="Email" required>
+                        <input name="email" type="text" class="form-control" placeholder="Email">
                         <i class="fas fa-envelope form-icon mx-3"></i>
                     </div>
 
                     <div class="mb-4 input-group">
-                        <select name="role" class="form-select" aria-label="Role selection" style="padding-left: 40px; height: 50px;">
-                            <option selected>Select Role</option>
-                            <% const roles = ["admin", "buyer"] %>
-                            <% roles.forEach(el => { %>
-                                <option value="<%= el %>"><%= el %></option>
-                            <% }) %>
-                        </select>
+                        <input name="role" type="text" class="form-control" placeholder="Role">
                         <i class="fas fa-font-awesome form-icon mx-3"></i>
                     </div>
 
                     <div class="mb-4 input-group">
-                        <input name="password" type="password" class="form-control" placeholder="Password" required>
+                        <input name="password" type="password" class="form-control" placeholder="Password">
                         <i class="fas fa-lock form-icon mx-3"></i>
                     </div>
                     
                     <div class="mb-4 input-group">
-                        <input type="password" class="form-control" placeholder="Confirm Password" required>
+                        <input type="password" class="form-control" placeholder="Confirm Password">
                         <i class="fas fa-lock form-icon mx-3"></i>
                     </div>
                     

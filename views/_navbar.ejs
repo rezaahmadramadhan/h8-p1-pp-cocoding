@@ -14,6 +14,31 @@
             </form>
 
             <style>
+                .role-message {
+                    background: rgba(255, 245, 245, 0.9);
+                    border-radius: 8px;
+                    padding: 8px 15px;
+                    margin: 0 1rem;
+                    border: 1px solid #ffe0e0;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                }
+
+                .role-highlight {
+                    color: #dc3545;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+
+                .role-message p {
+                    font-size: 0.9rem;
+                    color: #444;
+                    margin: 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                }
+
                 .brand-btn {
                     background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
                     border: none;
@@ -77,11 +102,18 @@
             </style>
 
             <% if (error) { %>
-                <p style="color: red;"><%= error %></p>
+                <div class="alert alert-danger mb-0 mx-3 p-2" role="alert">
+                    <%= error %>
+                </div>
             <% } %>
 
             <% if (user) { %>
-                <p>Halo <%= user.name %>, semoga bisa lulus Hactiv8 tepat waktu</p>
+                <div class="role-message">
+                    <p class="mb-0">Role kamu: 
+                        <span class="role-highlight"><%= user.role %></span>, 
+                        semoga bisa lulus Hactiv8 tepat waktu 🚀
+                    </p>
+                </div>
             <% } %>
 
             <ul class="navbar-nav ms-auto">
@@ -96,7 +128,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/profile/<%= user.userId %>/edit">Profile</a>
                     </li>
-                    <% if (user.role === "admin") { %>
+                    <% if (user.role === "seller") { %>
                         <li class="nav-item">
                             <a class="nav-link" href="/courses/add">Add Courses</a>
                         </li>

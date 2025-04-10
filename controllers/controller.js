@@ -2,15 +2,19 @@ const bcryptjs = require('bcryptjs')
 const { where, Op } = require('sequelize')
 const { formatRp, formatLevel, formatDuration } = require('../helpers/helper')
 const {Category, Course, Profile, Transaction, User} = require('../models')
+const qr = require('qrcode')
+const src = require('daisyui')
 
 class Controller {
     static async homePage(req, res) {
         try {
-            const {error} = req.query
-            const {user} = req.session
+            const {error, notif} = req.query
+            const {user} = req.session            
                 
-            res.render('homePage', {error, user})
+            res.render('homePage', {error,notif, user})
         } catch (error) {
+            console.log(error);
+            
             res.send(error)
         }
     }
@@ -26,6 +30,8 @@ class Controller {
                     model: Category
                 }
             })
+
+            const category = await Category.findAll()
 
             if(search) {
                 data = await Course.findAll({
@@ -45,8 +51,10 @@ class Controller {
                 })
             }
                 
-            res.render('showCourse', {data, error, user, formatRp})  
+            res.render('showCourse', {data,category, error, user, formatRp})  
         } catch (error) {
+            console.log(error);
+            
             res.send(error)
         }
     }
@@ -63,7 +71,22 @@ class Controller {
                 }
             }))[0]
 
-            res.render('buyCourse', {data, error, user})
+            qr.toDataURL("https://www.emoderationskills.com/wp-content/uploads/2010/08/QR1.jpg", (err,src) => {
+                res.render('buyCourse', {data, error, user, formatRp, qr: src})
+            })
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async postBuyCourse(req, res) {
+        try {
+            const {course, totalPrice, CourseId} = req.body
+            const {userId} = req.session.user
+            const dateTrans = new Date()
+            await Transaction.create({dateTrans, course, totalPrice, CourseId, ProfileId: userId})
+            
+            res.redirect(`/?notif=Selamat, Pembelian course ${course} berhasil!!!`)
         } catch (error) {
             res.send(error)
         }
@@ -71,13 +94,18 @@ class Controller {
 
     static async signUp(req, res) {
         try {
-            let data = await User.create(req.body)
-            await Profile.create({UserId: data.id})
-            
+            let user = await User.create(req.body)            
+            await Profile.create({UserId: user.id})
 
             res.redirect("/login")
         } catch (error) {
-            res.send(error)
+            if(error.name === "SequelizeValidationError" || error.name === "SequelizeUniqueConstraintError") {
+                let msg = error.errors.map(el => el.message)
+                
+                res.redirect(`/login?error=${msg}`)
+            } else{
+                res.send(error)
+            }
         }
     }
 
@@ -116,9 +144,10 @@ class Controller {
 
     static async addCourse(req, res) {
         try {
-            let data = await Category.findAll()
+            const {error} = req.query
+            const data = await Category.findAll()
             
-            res.render('addCourse', {data})
+            res.render('addCourse', {data, error})
         } catch (error) {
             res.send(error)
         }
@@ -130,7 +159,13 @@ class Controller {
             
             res.redirect("/courses")
         } catch (error) {
-            res.send(error)
+            if(error.name === "SequelizeValidationError" || error.name === "SequelizeUniqueConstraintError") {
+                let msg = error.errors.map(el => el.message)
+                
+                res.redirect(`/courses/add?error=${msg}`)
+            } else{
+                res.send(error)
+            }
         }
     }
 
@@ -156,6 +191,7 @@ class Controller {
     static async editCourse(req,res) {
         try {
             const {id} = req.params
+            const {error} = req.query
             let data = (await Course.findAll({
                 where: {id},
                 include: {
@@ -164,7 +200,7 @@ class Controller {
             }))[0]
             let cat = await Category.findAll()
 
-            res.render('editCourse', {data, cat})
+            res.render('editCourse', {data, error, cat})
         } catch (error) {
             res.send(error)
         }
@@ -179,7 +215,15 @@ class Controller {
             
             res.redirect("/courses")
         } catch (error) {
-            res.send(error)
+            const {id} = req.params
+
+            if(error.name === "SequelizeValidationError" || error.name === "SequelizeUniqueConstraintError") {
+                let msg = error.errors.map(el => el.message)
+                
+                res.redirect(`/courses/${id}/edit?error=${msg}`)
+            } else{
+                res.send(error)
+            }
         }
     }
 
@@ -189,11 +233,12 @@ class Controller {
             const {error} = req.query
             const {user} = req.session
             const data = (await Profile.findAll({
-                where: {UserId: +id},
+                where: {id},
                 include: {
                     model: User
                 }
             }))[0]
+            
             
             res.render('editProfile', {data, error, user})
         } catch (error) {
@@ -210,8 +255,6 @@ class Controller {
 
             res.redirect("/")
         } catch (error) {
-            console.log(error);
-            
             res.send(error)
         }
     }

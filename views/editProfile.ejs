@@ -56,7 +56,7 @@
                 <form action="/profile/<%= data.id %>/edit" method="post">
                     <div class="mb-3">
                         <label class="form-label">Nama Lengkap</label>
-                        <input name="name" type="text" class="form-control" value="<%= data.name %>">
+                        <input name="name" type="text" class="form-control" value="<%= data.name %>" placeholder="Full name here">
                     </div>
 
                     <div class="mb-3">
@@ -80,34 +80,8 @@
 
                     <div class="mb-4">
                         <label class="form-label">Phone Number</label>
-                        <input name="phone" type="text" class="form-control" value="<%= data.phone %>">
+                        <input name="phone" type="text" class="form-control" value="<%= data.phone %>" placeholder="ex: 0858********">
                     </div>
-
-                    <!-- Ubah Password -->
-                    <!-- <div class="mb-4">
-                        <button type="button" 
-                                class="btn btn-outline-secondary w-100" 
-                                id="togglePassword">
-                            Ubah Password
-                        </button>
-                        
-                        <div class="password-fields mt-3">
-                            <div class="mb-3">
-                                <label class="form-label">Password Saat Ini</label>
-                                <input type="password" class="form-control">
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label">Password Baru</label>
-                                <input type="password" class="form-control" name="newPassword">
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label">Konfirmasi Password Baru</label>
-                                <input type="password" class="form-control" name="confirmPassword">
-                            </div>
-                        </div>
-                    </div> -->
 
                     <!-- Tombol Aksi -->
                     <div class="d-grid gap-2">

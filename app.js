@@ -15,7 +15,6 @@ app.use(session({
         sameSite: true
      }
 }))
-
 app.use('/', require("./routers"))
 
 app.listen(port, () => {

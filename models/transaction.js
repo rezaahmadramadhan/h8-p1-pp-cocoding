@@ -5,8 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Transaction extends Model {
     static associate(models) {
-      Transaction.belongsTo(models.Profile, {foreignKey: "ProfileId"})
-      Transaction.belongsTo(models.Course, {foreignKey: "CourseId"})
+      Transaction.belongsTo(models.Profile, { foreignKey: 'ProfileId' })
+      Transaction.belongsTo(models.Course, { foreignKey: 'CourseId' })
     }
   }
   Transaction.init({

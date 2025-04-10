@@ -87,57 +87,42 @@
                     
                     <div class="d-flex justify-content-between mb-3">
                         <span>Harga Course:</span>
-                        <span class="fw-bold">Rupiah</span>
-                    </div>
-                    
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Diskon:</span>
-                        <span class="text-success">-</span>
+                        <span class="fw-bold"><%= formatRp(data.price) %></span>
                     </div>
                     
                     <hr>
                     
                     <div class="d-flex justify-content-between mb-4">
                         <span class="fw-bold">Total Pembayaran:</span>
-                        <span class="fw-bold text-primary"></span>
+                        <span class="fw-bold text-primary"><%= formatRp(data.price) %></span>
                     </div>
 
-                    <form action="/courses/<%= data.id %>/purchase" method="POST">
-                        <div class="mb-4">
-                            <h5>Metode Pembayaran</h5>
-                            <div class="payment-methods">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" required>
-                                    <label class="form-check-label" for="creditCard">
-                                        <i class="fa-solid fa-credit-card"></i>
-                                        Kartu Kredit
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="bankTransfer">
-                                    <label class="form-check-label" for="bankTransfer">
-                                        <img src="bank-transfer-icon.png" alt="Bank Transfer">
-                                        Transfer Bank
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="ewallet">
-                                    <label class="form-check-label" for="ewallet">
-                                        <img src="ewallet-icon.png" alt="E-Wallet">
-                                        Dompet Digital
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                    <form action="/courses/<%= data.id %>/buy" method="post">
+                        <input type="hidden" name="course" value="<%= data.name %>">
+                        <input type="hidden" name="totalPrice" value="<%= data.price %>">
+                        <input type="hidden" name="CourseId" value="<%= data.id %>">
 
                         <div class="mb-4">
-                            <label for="email" class="form-label">Email untuk Notifikasi</label>
-                            <input type="email" class="form-control" id="email" name="email" 
-                                   value="" required>
+                            <div class="text-center">
+                                <h5>Scan untuk Pembayaran</h5>
+                            </div>
+                            <div class="form-check">
+                                <img src="<%= qr %>" alt="QR Code" class="qr-image">
+                            </div>
+                              
+                              <style>
+                                .qr-image {
+                                  width: 400px;
+                                  height: 400px;
+                                  object-fit: contain;
+                                  border: 2px solid #ddd;
+                                  padding: 10px;
+                                }
+                              </style>
                         </div>
 
                         <button type="submit" class="btn btn-primary w-100 py-3">
-                            <i class="fas fa-lock me-2"></i>Bayar Sekarang
+                            <i class="fas fa-check-to-slot me-2"></i>Sudah Bayar
                         </button>
                     </form>
 
@@ -161,7 +146,7 @@
                 <div class="modal-body">
                     <p>Terima kasih telah membeli course <strong><%= data.name %></strong>. 
                     Materi course sekarang dapat diakses di dashboard Anda.</p>
-                    <p>Invoice telah dikirim ke <strong>Email@gmail.com</strong></p>
+                    <p>Invoice telah dikirim ke <strong><%= data.email %></strong></p>
                 </div>
                 <div class="modal-footer">
                     <a href="/dashboard" class="btn btn-primary">Ke Dashboard</a>
@@ -169,18 +154,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Handle payment method selection
-        document.querySelectorAll('.form-check-input').forEach(input => {
-            input.addEventListener('change', function() {
-                // Tambahkan logika untuk metode pembayaran berbeda
-                console.log('Payment method selected:', this.id);
-            });
-        });
-
-        // Tampilkan modal jika ada parameter success
-
-    </script>
 </body>
 </html>

@@ -26,10 +26,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: "Programing Language is required"
+          msg: "Programming Language is required"
         },
         notEmpty: {
-          msg: "Programing Language is required"
+          msg: "Programming Language is required"
         }
       }
     }

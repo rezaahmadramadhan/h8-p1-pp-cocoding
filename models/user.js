@@ -25,12 +25,18 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: {
+        msg: "Email has been registered"
+      },
       validate: {
         notNull: {
           msg: "Email is required"
         },
         notEmpty: {
           msg: "Email is required"
+        },
+        isEmail: {
+          msg: "Format email wrong!"
         }
       }
     },
@@ -45,8 +51,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Password is required"
         },
         lengthPassword() {
-          this.password = this.password.split("")
-          if (this.password < 8) throw "Password length minimal is 8"
+          if (this.password.length < 8) throw "Password length minimal is 8"
         }
       }
     },
@@ -59,6 +64,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         notEmpty: {
           msg: "Role is required"
+        },
+        isIn: {
+          args: [['buyer', 'seller']],
+          msg: "Only buyer or seller!!"
         }
       }
     }
