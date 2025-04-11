@@ -122,6 +122,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         notEmpty: {
           msg: "Image is required"
+        },
+        isUrl: {
+          msg: "Input must be an Url"
         }
       }
     },
